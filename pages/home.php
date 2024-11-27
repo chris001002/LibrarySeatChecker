@@ -14,7 +14,6 @@ require_once($_SERVER['DOCUMENT_ROOT'] . "/index.php");
 
 <body>
     <?php require_once("nav.php") ?>
-
 </body>
 
 </html>
