@@ -11,7 +11,9 @@ $routes = [
     '/logout' => 'logout.php',
     '/addUser' => 'addUser.php',
     '/delete' => 'delete.php',
-    '/update' => 'update.php'
+    '/update' => 'update.php',
+    '/seats' => 'seats.php',
+    '/about' => 'about.php'
 ];
 if (array_key_exists($path, $routes)) {
     require "pages/" . $routes[$path];
