@@ -1,5 +1,6 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'] . "/index.php");
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,6 +9,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . "/index.php");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="output.css">
     <script src="../node_modules/flowbite/dist/flowbite.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -50,11 +52,26 @@ require_once($_SERVER['DOCUMENT_ROOT'] . "/index.php");
 
 <body class="min-h-screen h-fit flex flex-col">
     <?php require_once("nav.php") ?>
-
+    <?php
+    if (isset($_SESSION["error"])) {
+    ?>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: '<?php echo $_SESSION["error"] ?>',
+                confirmationButtonText: 'Close'
+            })
+        </script>
+    <?php
+        unset($_SESSION["error"]);
+    } ?>
 
     <div class=" flex-grow grid place-items-center">
         <form class="mx-auto md:w-1/4" method="post" action="/addUser">
-            <div class="mb-5">
+            <h1 class="block text-3xl font-extrabold dark:text-white text-center w-full mb-3">Sign Up</h1>
+            <div class=" mb-5">
                 <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
                 <input name="email" type="email" id="email" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="name@domain.com" required />
             </div>
@@ -79,6 +96,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . "/index.php");
                     <li type="disc" class="hidden text-red-500">Password must not contain spaces and semicolons</li>
                 </ul>
             </div>
+            <p class="mb-5">Already have an account? Click here to <a href="/log_in" class="text-blue-600 hover:underline">Log In</a></p>
             <button name="submit" type="submit" value="true" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Register new account</button>
         </form>
     </div>

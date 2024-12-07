@@ -9,7 +9,6 @@ class Database
     {
         try {
             $this->conn = mysqli_connect("localhost", "root", "");
-            echo "Connected successfully";
             $sql = "CREATE DATABASE IF NOT EXISTS $this->database_name";
             $this->conn->query($sql);
             $this->conn->select_db($this->database_name);
@@ -40,9 +39,51 @@ class Database
     }
     function createUser($studentID, $email, $name, $password)
     {
+        $email = strtolower($email);
         $sql = "INSERT INTO $this->TABLE1 (studentID, email, name, password) VALUES (?, ?, ?, ?)";
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("ssss", $studentID, $email, $name, $password);
         $stmt->execute();
+    }
+    function userExistsEmail($email)
+    {
+        $email = strtolower($email);
+        $sql = "SELECT * FROM $this->TABLE1 WHERE email = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->num_rows > 0;
+    }
+    function userExistsId($studentID)
+    {
+        $sql = "SELECT * FROM $this->TABLE1 WHERE studentId = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("s", $studentID);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->num_rows > 0;
+    }
+    function log_in($email, $password)
+    {
+        $email = strtolower($email);
+        $password = hash("sha256", $password);
+        $sql = "SELECT id, studentID, email, name FROM $this->TABLE1 WHERE email = ? AND password = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("ss", $email, $password);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $user = [
+                'id' => $row['id'],
+                'studentID' => $row['studentID'],
+                'email' => $row['email'],
+                'name' => $row['name']
+            ];
+            return $user;
+        } else {
+            return -1;
+        }
     }
 }

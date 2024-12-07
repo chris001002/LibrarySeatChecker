@@ -13,10 +13,14 @@ $routes = [
     '/delete' => 'delete.php',
     '/update' => 'update.php',
     '/seats' => 'seats.php',
-    '/about' => 'about.php'
+    '/about' => 'about.php',
+    '/sign_out' => 'sign_out.php'
 ];
 if (array_key_exists($path, $routes)) {
     require "pages/" . $routes[$path];
+} else if (strpos($path, '/img/') === 0) {
+    header('Content-Type: image/jpeg');
+    readfile("img/" . substr($path, 5));
 } else {
     http_response_code(404);
     echo "Page not found";
