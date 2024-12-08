@@ -25,6 +25,7 @@ class Database
                 seatID INT AUTO_INCREMENT PRIMARY KEY,
                 userID INT DEFAULT NULL,
                 Location VARCHAR(255),
+                expiry_time DATETIME DEFAULT NULL,
                 CONSTRAINT FK1_$this->TABLE2 FOREIGN KEY (userID) REFERENCES $this->TABLE1(id)
                 )
                 ";
@@ -106,5 +107,25 @@ class Database
             $result = $this->conn->query($sql);
         }
         return $result->fetch_all(MYSQLI_ASSOC);
+    }
+    function takeSeat($userId, $location)
+    {
+        $sql = "UPDATE $this->TABLE2 SET userId = ?, expiry_time = ? WHERE location = ?";
+        $_SESSION["test"] = "aaaa";
+        $stmt = $this->conn->prepare($sql);
+        $expiry = new DateTime();
+        $expiry->modify("+1 hour");
+        $expiry = $expiry->format("Y-m-d H:i:s");
+        $stmt->bind_param("iss", $userId, $expiry, $location);
+        $stmt->execute();
+    }
+    function hasTakenSeat($userId)
+    {
+        $sql = "SELECT * FROM $this->TABLE2 WHERE userId = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("i", $userId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->num_rows > 0;
     }
 }

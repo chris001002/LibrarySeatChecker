@@ -12,6 +12,11 @@ function evaluateColor($userId)
 	return $class;
 }
 $database = new Database();
+if (isset($_POST['location'])) {
+	$database->takeSeat($_SESSION['user']['id'], $_POST['location']);
+	echo "success";
+	exit();
+}
 $seats = $database->getAllSeats();
 $i = -1;
 ?>
@@ -25,6 +30,23 @@ $i = -1;
 	<link rel="stylesheet" href="output.css" />
 	<script src="../node_modules/flowbite/dist/flowbite.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<script>
+		function takeSeat(location) {
+			if ("<?= isset($_SESSION['user']) ?>" != "1") {
+				window.location.href = "/log_in";
+			}
+			$.ajax({
+				type: "POST",
+				url: "/seats",
+				data: {
+					location: location
+				},
+				success: function(data) {
+					window.location.href = "/seats";
+				}
+			})
+		}
+	</script>
 </head>
 
 <body class="min-h-screen h-fit flex flex-col dark:bg-slate-800">
@@ -40,7 +62,7 @@ $i = -1;
 					<?php
 					for ($_i = 0; $_i < 5; $_i++) {
 					?>
-						<button type="button" class="<?= evaluateColor($seats[++$i]["userId"]) ?>" <?= $seats[$i]["userId"] == null ? "" : "disabled" ?>><?= $seats[$i]["location"] ?></button>
+						<button type="button" class="<?= evaluateColor($seats[++$i]["userId"]) ?>" <?= $seats[$i]["userId"] == null ? "" : "disabled" ?> onclick="takeSeat(`<?= $seats[$i]['location'] ?>`)"><?= $seats[$i]["location"] ?></button>
 					<?php
 					}
 					?>
@@ -52,7 +74,7 @@ $i = -1;
 					<?php
 					for ($_i = 0; $_i < 5; $_i++) {
 					?>
-						<button type="button" class="<?= evaluateColor($seats[++$i]["userId"]) ?>" <?= $seats[$i]["userId"] == null ? "" : "disabled" ?>><?= $seats[$i]["location"] ?></button>
+						<button type="button" class="<?= evaluateColor($seats[++$i]["userId"]) ?>" <?= $seats[$i]["userId"] == null ? "" : "disabled" ?> onclick="takeSeat(`<?= $seats[$i]['location'] ?>`)"><?= $seats[$i]["location"] ?></button>
 					<?php
 					}
 					?>
@@ -61,28 +83,7 @@ $i = -1;
 					<?php
 					for ($_i = 0; $_i < 5; $_i++) {
 					?>
-						<button type="button" class="<?= evaluateColor($seats[++$i]["userId"]) ?>" <?= $seats[$i]["userId"] == null ? "" : "disabled" ?>><?= $seats[$i]["location"] ?></button>
-					<?php
-					}
-					?>
-				</div>
-				<div class="[writing-mode:vertical-rl] h-full text-center bg-gray-700 text-white font-bold mr-2 flex justify-center items-center md:text-2xl">
-					Table
-				</div>
-				<div class="flex flex-col py-3 mr-2">
-					<?php
-					for ($_i = 0; $_i < 5; $_i++) {
-					?>
-						<button type="button" class="<?= evaluateColor($seats[++$i]["userId"]) ?>" <?= $seats[$i]["userId"] == null ? "" : "disabled" ?>><?= $seats[$i]["location"] ?></button>
-					<?php
-					}
-					?>
-				</div>
-				<div class="flex flex-col py-3 mr-2">
-					<?php
-					for ($_i = 0; $_i < 5; $_i++) {
-					?>
-						<button type="button" class="<?= evaluateColor($seats[++$i]["userId"]) ?>" <?= $seats[$i]["userId"] == null ? "" : "disabled" ?>><?= $seats[$i]["location"] ?></button>
+						<button type="button" class="<?= evaluateColor($seats[++$i]["userId"]) ?>" <?= $seats[$i]["userId"] == null ? "" : "disabled" ?> onclick="takeSeat(`<?= $seats[$i]['location'] ?>`)"> <?= $seats[$i]["location"] ?></button>
 					<?php
 					}
 					?>
@@ -94,7 +95,7 @@ $i = -1;
 					<?php
 					for ($_i = 0; $_i < 5; $_i++) {
 					?>
-						<button type="button" class="<?= evaluateColor($seats[++$i]["userId"]) ?>" <?= $seats[$i]["userId"] == null ? "" : "disabled" ?>><?= $seats[$i]["location"] ?></button>
+						<button type="button" class="<?= evaluateColor($seats[++$i]["userId"]) ?>" <?= $seats[$i]["userId"] == null ? "" : "disabled" ?> onclick="takeSeat(`<?= $seats[$i]['location'] ?>`)"><?= $seats[$i]["location"] ?></button>
 					<?php
 					}
 					?>
@@ -103,7 +104,7 @@ $i = -1;
 					<?php
 					for ($_i = 0; $_i < 5; $_i++) {
 					?>
-						<button type="button" class="<?= evaluateColor($seats[++$i]["userId"]) ?>" <?= $seats[$i]["userId"] == null ? "" : "disabled" ?>><?= $seats[$i]["location"] ?></button>
+						<button type="button" class="<?= evaluateColor($seats[++$i]["userId"]) ?>" <?= $seats[$i]["userId"] == null ? "" : "disabled" ?> onclick="takeSeat(`<?= $seats[$i]['location'] ?>`)"><?= $seats[$i]["location"] ?></button>
 					<?php
 					}
 					?>
@@ -115,7 +116,28 @@ $i = -1;
 					<?php
 					for ($_i = 0; $_i < 5; $_i++) {
 					?>
-						<button type="button" class="<?= evaluateColor($seats[++$i]["userId"]) ?>" <?= $seats[$i]["userId"] == null ? "" : "disabled" ?>><?= $seats[$i]["location"] ?></button>
+						<button type="button" class="<?= evaluateColor($seats[++$i]["userId"]) ?>" <?= $seats[$i]["userId"] == null ? "" : "disabled" ?> onclick="takeSeat(`<?= $seats[$i]['location'] ?>`)"><?= $seats[$i]["location"] ?></button>
+					<?php
+					}
+					?>
+				</div>
+				<div class="flex flex-col py-3 mr-2">
+					<?php
+					for ($_i = 0; $_i < 5; $_i++) {
+					?>
+						<button type="button" class="<?= evaluateColor($seats[++$i]["userId"]) ?>" <?= $seats[$i]["userId"] == null ? "" : "disabled" ?> onclick="takeSeat(`<?= $seats[$i]['location'] ?>`)"><?= $seats[$i]["location"] ?></button>
+					<?php
+					}
+					?>
+				</div>
+				<div class="[writing-mode:vertical-rl] h-full text-center bg-gray-700 text-white font-bold mr-2 flex justify-center items-center md:text-2xl">
+					Table
+				</div>
+				<div class="flex flex-col py-3 mr-2">
+					<?php
+					for ($_i = 0; $_i < 5; $_i++) {
+					?>
+						<button type="button" class="<?= evaluateColor($seats[++$i]["userId"]) ?>" <?= $seats[$i]["userId"] == null ? "" : "disabled" ?> onclick="takeSeat(`<?= $seats[$i]['location'] ?>`)"><?= $seats[$i]["location"] ?></button>
 					<?php
 					}
 					?>
