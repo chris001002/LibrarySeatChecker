@@ -23,7 +23,7 @@ class Database
             $this->conn->query($sql);
             $sql = "CREATE TABLE IF NOT EXISTS $this->TABLE2 (
                 seatID INT AUTO_INCREMENT PRIMARY KEY,
-                userID INT,
+                userID INT DEFAULT NULL,
                 Location VARCHAR(255),
                 CONSTRAINT FK1_$this->TABLE2 FOREIGN KEY (userID) REFERENCES $this->TABLE1(id)
                 )
@@ -85,5 +85,26 @@ class Database
         } else {
             return -1;
         }
+    }
+    function getAllSeats()
+    {
+        $sql = "SELECT userId, location FROM $this->TABLE2";
+        $result = $this->conn->query($sql);
+        if ($result->num_rows == 0) {
+            $cols = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+            $rows = ['1', '2', '3', '4', '5'];
+            foreach ($cols as $col) {
+                foreach ($rows as $row) {
+                    $sql2 = "INSERT INTO $this->TABLE2 (location) VALUES (?)";
+                    $stmt = $this->conn->prepare($sql2);
+                    $location = $col . $row;
+                    $stmt->bind_param("s", $location);
+                    $stmt->execute();
+                    $stmt->close();
+                }
+            }
+            $result = $this->conn->query($sql);
+        }
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
 }
