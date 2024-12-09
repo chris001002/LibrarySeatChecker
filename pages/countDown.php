@@ -1,7 +1,8 @@
 <?php
+
+
 require_once($_SERVER['DOCUMENT_ROOT'] . "/index.php");
 require_once($_SERVER['DOCUMENT_ROOT'] . "/database.php");
-$database = new Database();
 $time = $database->timeRemaining($_SESSION['user']['id']);
 ?>
 <!DOCTYPE html>

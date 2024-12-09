@@ -27,6 +27,7 @@ class Database
                 userID INT DEFAULT NULL,
                 Location VARCHAR(255),
                 expiry_time DATETIME DEFAULT NULL,
+                mailed BOOLEAN DEFAULT FALSE,
                 CONSTRAINT FK1_$this->TABLE2 FOREIGN KEY (userID) REFERENCES $this->TABLE1(id)
                 )
                 ";
@@ -127,6 +128,7 @@ class Database
         $stmt->bind_param("i", $userId);
         $stmt->execute();
         $result = $stmt->get_result();
+        $stmt->close();
         return $result->num_rows > 0;
     }
     function timeRemaining($userId)
@@ -136,6 +138,7 @@ class Database
         $stmt->bind_param("i", $userId);
         $stmt->execute();
         $result = $stmt->get_result();
+        $stmt->close();
         $row = $result->fetch_assoc();
         return $row["expiry_time"];
     }
@@ -147,5 +150,30 @@ class Database
         $date = $date->format("Y-m-d H:i:s");
         $stmt->bind_param("s", $date);
         $stmt->execute();
+        $stmt->close();
+    }
+    function usersSessionAboutToExpire()
+    {
+        $minute = 5;
+        $sql = "SELECT email, name FROM $this->TABLE2
+        JOIN $this->TABLE1 ON $this->TABLE2.userId = $this->TABLE1.id
+        WHERE expiry_time < ? AND mailed = 0";
+        $stmt = $this->conn->prepare($sql);
+        $date = new DateTime();
+        $date->modify("+$minute minutes");
+        $date = $date->format("Y-m-d H:i:s");
+        $stmt->bind_param("s", $date);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $sql = "UPDATE $this->TABLE2 SET mailed = 1 WHERE expiry_time < ? AND mailed = 0";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("s", $date);
+        $stmt->execute();
+        $stmt->close();
+        if ($result->num_rows > 0) {
+            return $result->fetch_all(MYSQLI_ASSOC);
+        } else {
+            return [];
+        }
     }
 }
