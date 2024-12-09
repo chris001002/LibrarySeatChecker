@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('Asia/Jakarta');
 class Database
 {
     private $conn = null;
@@ -127,5 +128,24 @@ class Database
         $stmt->execute();
         $result = $stmt->get_result();
         return $result->num_rows > 0;
+    }
+    function timeRemaining($userId)
+    {
+        $sql = "SELECT expiry_time FROM $this->TABLE2 WHERE userId = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("i", $userId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        return $row["expiry_time"];
+    }
+    function deleteExpiredSeats()
+    {
+        $sql = "UPDATE $this->TABLE2 SET userId = NULL, expiry_time = NULL WHERE expiry_time < ?";
+        $stmt = $this->conn->prepare($sql);
+        $date = new DateTime();
+        $date = $date->format("Y-m-d H:i:s");
+        $stmt->bind_param("s", $date);
+        $stmt->execute();
     }
 }

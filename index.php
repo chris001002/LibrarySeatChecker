@@ -25,7 +25,7 @@ if (array_key_exists($path, $routes)) {
 } else if ($path == '/seats') {
     require_once "database.php";
     $database = new Database();
-    if ($database->hasTakenSeat($_SESSION['user']['id'])) {
+    if (isset($_SESSION["user"]) && $database->hasTakenSeat($_SESSION['user']['id'])) {
         require "pages/countDown.php";
     } else {
         require "pages/seats.php";
