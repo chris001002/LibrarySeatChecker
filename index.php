@@ -15,7 +15,7 @@ $routes = [
     '/update' => 'update.php',
     '/about' => 'about.php',
     '/sign_out' => 'sign_out.php',
-    '/test' => '../expired.php',
+    '/extend' => 'extend.php',
 ];
 if (array_key_exists($path, $routes)) {
     require "pages/" . $routes[$path];

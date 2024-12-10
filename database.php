@@ -176,4 +176,31 @@ class Database
             return [];
         }
     }
+    function extendTime($userId)
+    {
+        $current  = $this->timeRemaining($userId);
+        $current = new DateTime($current);
+        $diff = $current->diff(new DateTime());
+        $minutes = ($diff->days * 24 * 60) + ($diff->h * 60) + $diff->i;
+        echo $minutes;
+        if ($minutes < 5 && $minutes >= 0) {
+            $sql = "UPDATE $this->TABLE2 SET expiry_time = ?, mailed = FALSE WHERE userId = ?";
+            echo "$sql";
+            $current = new DateTime();
+            $current->modify("+1 hour");
+            $current = $current->format("Y-m-d H:i:s");
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("si", $current, $userId);
+            $stmt->execute();
+            return true;
+        }
+        return false;
+    }
+    function stopSession($userId)
+    {
+        $sql = "UPDATE $this->TABLE2 SET userId = NULL, expiry_time = NULL, mailed = FALSE WHERE userId = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("i", $userId);
+        $stmt->execute();
+    }
 }

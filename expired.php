@@ -15,8 +15,8 @@ $mail->Username = "softwareengineeringlibrary123@gmail.com";
 $mail->Password = "zshpcofirgayslrh";
 $mail->SMTPSecure = 'tls';
 $mail->Port = 587;
-$mail->setFrom('softwareengineeringlibrary123@gmail.com', 'Your Name');
-$url = "http://localhost:3000/test";
+$mail->setFrom('softwareengineeringlibrary123@gmail.com', 'Library');
+$url = "http://localhost:3000/extend";
 print_r($recipients);
 foreach ($recipients as $recipient) {
     $mail->addAddress($recipient['email'], $recipient['name']);
