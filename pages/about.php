@@ -17,7 +17,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . "/index.php");
     <div class="flex flex-col items-center justify-center h-full">
         <div class="max-w-lg text-center px-4">
             <header>
-                <h1 class="text-blue-600 text-2xl font-semibold">About Us</h1>
+                <h1 class="text-blue-600 dark:text-sky-400 text-2xl font-semibold">About Us</h1>
             </header>
             <div class="flex items-center gap-x-fixed-md text-color-blue-700 text-3xl justify-center dark:text-white">
                 <p>Learn more about this website</p>

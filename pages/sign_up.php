@@ -50,7 +50,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . "/index.php");
     </script>
 </head>
 
-<body class="min-h-screen h-fit flex flex-col">
+<body class="min-h-screen h-fit flex flex-col dark:bg-slate-800">
     <?php require_once("nav.php") ?>
     <?php
     if (isset($_SESSION["error"])) {
@@ -96,7 +96,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . "/index.php");
                     <li type="disc" class="hidden text-red-500">Password must not contain spaces and semicolons</li>
                 </ul>
             </div>
-            <p class="mb-5">Already have an account? Click here to <a href="/log_in" class="text-blue-600 hover:underline">Log In</a></p>
+            <p class="mb-5 dark:text-white">Already have an account? Click here to <a href="/log_in" class="text-blue-600 dark:text-sky-400 hover:underline">Log In</a></p>
             <button name="submit" type="submit" value="true" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Register new account</button>
         </form>
     </div>
