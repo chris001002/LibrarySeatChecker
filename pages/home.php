@@ -35,7 +35,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . "/index.php");
             </header>
 
             <!-- Form with submit button -->
-            <button onclick="go()" class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-sky-500 dark:hover:bg-sky-600 dark:focus:ring-sky-800 my-8">
+            <button onclick="go()" class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-sky-500 dark:hover:bg-sky-600 dark:focus:ring-sky-300 my-8">
                 Go Now ->
             </button>
 
