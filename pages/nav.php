@@ -50,13 +50,13 @@
             <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                 <?php $current_page = basename($_SERVER['PHP_SELF']); ?>
                 <li>
-                    <a href="/" class="block py-2 px-3 rounded md:p-0 <?= $current_page === 'index.php' ? 'text-blue-700 dark:text-blue-500' : 'text-gray-900 dark:text-white' ?>" aria-current="page">Home</a>
+                    <a href="/" class="block py-2 px-3 rounded md:p-0 <?= $current_page === 'index.php' ? 'text-blue-700 dark:text-sky-400' : 'text-gray-900 dark:text-white' ?>" aria-current="page">Home</a>
                 </li>
                 <li>
-                    <a href="/about" class="block py-2 px-3 rounded md:p-0 <?= $current_page === 'about' ? 'text-blue-700 dark:text-blue-500' : 'text-gray-900 dark:text-white' ?>">About</a>
+                    <a href="/about" class="block py-2 px-3 rounded md:p-0 <?= $current_page === 'about' ? 'text-blue-700 dark:text-sky-400' : 'text-gray-900 dark:text-white' ?>">About</a>
                 </li>
                 <li>
-                    <a href="/seats" class="block py-2 px-3 rounded md:p-0 <?= $current_page === 'seats' ? 'text-blue-700 dark:text-blue-500' : 'text-gray-900 dark:text-white' ?>">Check seats</a>
+                    <a href="/seats" class="block py-2 px-3 rounded md:p-0 <?= $current_page === 'seats' ? 'text-blue-700 dark:text-sky-400' : 'text-gray-900 dark:text-white' ?>">Check seats</a>
                 </li>
             </ul>
         </div>
