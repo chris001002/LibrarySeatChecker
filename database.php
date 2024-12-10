@@ -144,7 +144,7 @@ class Database
     }
     function deleteExpiredSeats()
     {
-        $sql = "UPDATE $this->TABLE2 SET userId = NULL, expiry_time = NULL WHERE expiry_time < ?";
+        $sql = "UPDATE $this->TABLE2 SET userId = NULL, expiry_time = NULL, mailed = FALSE WHERE expiry_time < ?";
         $stmt = $this->conn->prepare($sql);
         $date = new DateTime();
         $date = $date->format("Y-m-d H:i:s");

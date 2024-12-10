@@ -1,5 +1,5 @@
 @echo off
 :loop
-php C:\Users\kokia\Desktop\LibrarySeatChecker\expired.php
+php "%~dp0expired.php"
 timeout /t 60 >nul
 goto loop
