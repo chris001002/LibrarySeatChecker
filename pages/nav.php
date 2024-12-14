@@ -2,12 +2,12 @@
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
             <img src="https://upload.wikimedia.org/wikipedia/en/a/ae/President_University_Logo.png" class="h-8" alt="Flowbite Logo" />
-            <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Library Seat Checker</span>
+            <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Library Seat Checker</span>
         </a>
         <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
             <button type="button" class="flex text-sm bg-gray-800 dark:bg-gray-400 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-sky-400" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
                 <span class="sr-only">Open user menu</span>
-                <img class="w-8 h-8 rounded-full" src="/img/Guest.png"  alt="user photo" srcset="/img/Guest.png" class="dark:src('/img/Guest_Dark.png')">
+                <img class="w-8 h-8 rounded-full" src="/img/Guest.png" alt="user photo" srcset="/img/Guest.png" class="dark:src('/img/Guest_Dark.png')">
             </button>
             <!-- Dropdown menu -->
             <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">

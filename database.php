@@ -3,16 +3,16 @@ date_default_timezone_set('Asia/Jakarta');
 class Database
 {
     private $conn = null;
-    private $database_name = "LibrarySeat";
-    private $TABLE2 = "seats";
+    private $databaseName = "LibrarySeat";
     private $TABLE1 = "users";
+    private $TABLE2 = "seats";
     function __construct()
     {
         try {
             $this->conn = mysqli_connect("localhost", "root", "");
-            $sql = "CREATE DATABASE IF NOT EXISTS $this->database_name";
+            $sql = "CREATE DATABASE IF NOT EXISTS $this->databaseName";
             $this->conn->query($sql);
-            $this->conn->select_db($this->database_name);
+            $this->conn->select_db($this->databaseName);
             $sql = "CREATE TABLE IF NOT EXISTS $this->TABLE1 (
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 studentID CHAR(12),
@@ -67,7 +67,7 @@ class Database
         $result = $stmt->get_result();
         return $result->num_rows > 0;
     }
-    function log_in($email, $password)
+    function logIn($email, $password)
     {
         $email = strtolower($email);
         $password = hash("sha256", $password);
@@ -116,7 +116,7 @@ class Database
         $_SESSION["test"] = "aaaa";
         $stmt = $this->conn->prepare($sql);
         $expiry = new DateTime();
-        $expiry->modify("+1 hour");
+        $expiry->modify("+1 minute");
         $expiry = $expiry->format("Y-m-d H:i:s");
         $stmt->bind_param("iss", $userId, $expiry, $location);
         $stmt->execute();

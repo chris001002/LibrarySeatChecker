@@ -26,6 +26,12 @@ if (isset($_POST["userId"])) {
             setInterval(function() {
                 let current = new Date();
                 let diff = time.getTime() - current.getTime();
+                if (diff <= 0) {
+                    // Stop the timer when it reaches 0
+                    clearInterval(countdownInterval);
+                    $('#time').html("0m 0s");
+                    return;
+                }
                 let seconds = Math.floor(diff / 1000);
                 let minutes = Math.floor(seconds / 60);
                 let hours = Math.floor(minutes / 60);

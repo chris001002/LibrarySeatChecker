@@ -68,8 +68,8 @@ require_once($_SERVER['DOCUMENT_ROOT'] . "/index.php");
         unset($_SESSION["error"]);
     } ?>
 
-    <div class=" flex-grow grid place-items-center">
-        <form class="mx-auto md:w-1/4" method="post" action="/addUser">
+    <div class="flex-grow grid place-items-center">
+        <form class="md:mx-auto md:w-1/4 w-[90%]" method="post" action="/addUser">
             <h1 class="block text-3xl font-extrabold dark:text-white text-center w-full mb-3">Sign Up</h1>
             <div class=" mb-5">
                 <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
@@ -82,7 +82,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . "/index.php");
             <div class="mb-5">
                 <label for="student_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Student ID</label>
                 <input name="student_id" type="text" id="student_id" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" required placeholder="001202200001" pattern="^\d{12}$" />
-                <ul class="box-border list-inside" id="student_id-errors">
+                <ul class="box-border list-inside break-words" id="student_id-errors">
                     <li type="disc" class="hidden text-red-500">StudentID must only contain numbers</li>
                     <li type="disc" class="hidden text-red-500">StudentID must be 12 characters long</li>
                 </ul>

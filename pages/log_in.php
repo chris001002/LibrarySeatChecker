@@ -6,10 +6,11 @@ if (isset($_POST['submit'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
     $database = new Database();
-    if ($database->log_in($email, $password)) {
-        $user = $database->log_in($email, $password);
+    if ($database->logIn($email, $password)) {
+        $user = $database->logIn($email, $password);
         if ($user == -1) $invalid = true;
         else {
+            $_SESSION["login"] = true;
             $_SESSION['user'] = $user;
             header("Location: /");
         }
@@ -32,13 +33,31 @@ if (isset($_POST['submit'])) {
     <title>Login</title>
     <link rel="stylesheet" href="output.css">
     <script src="../node_modules/flowbite/dist/flowbite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body class="min-h-screen h-fit flex flex-col dark:bg-slate-800">
     <?php require_once("nav.php") ?>
     <?php
-    if ($invalid) { ?>
+    if (isset($_SESSION["success"])) {
+    ?>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: 'Successfully registered!',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Close',
+            })
+        </script>
+    <?php
+        unset($_SESSION["success"]);
+    }
+
+    ?>
+    <?php
+    if ($invalid) { ?>
         <script>
             Swal.fire({
                 icon: 'error',

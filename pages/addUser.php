@@ -14,6 +14,7 @@ if (isset($_POST['submit'])) {
         header("Location: /sign_up");
     } else {
         $database->createUser($studentID, $email, $name, $password);
+        $_SESSION["success"] = "User created successfully";
         header("Location: /log_in");
     }
 }
